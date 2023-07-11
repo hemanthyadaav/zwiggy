@@ -27,7 +27,7 @@ const RestaurantMenu = () => {
         <div className="recommended-menu">
           <h3 style={{ marginLeft: "30px" }}>Recommended</h3>
           <ul>
-            {restaurant?.cards?.[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1].card?.card?.itemCards?.map(
+            {restaurant?.cards?.[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1].card?.card?.itemCards?.map(
               (item, index) => {
                 return <li key={index}>{item?.card?.info?.name}</li>;
               }

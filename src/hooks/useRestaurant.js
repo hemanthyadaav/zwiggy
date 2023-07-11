@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { RESTAURANT_MENU } from "../constants";
 
 const useRestaurant = (id) => {
   const [restaurant, setRestaurant] = useState(null);
@@ -8,15 +9,13 @@ const useRestaurant = (id) => {
   }, []);
 
   async function getRestaurantInfo() {
-    const data = await fetch(
-      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9235002&lng=77.6198998&restaurantId=${id}`
-    );
+    const data = await fetch(`${RESTAURANT_MENU}${id}`);
     const json = await data.json();
     setRestaurant(json.data);
     console.log(json.data);
     console.log(id);
     console.log(
-      json?.data?.cards?.[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]
+      json?.data?.cards?.[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]
         .card?.card?.itemCards
     );
   }

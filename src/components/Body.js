@@ -2,35 +2,15 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
-const filterData = (searchText, restaurants) => {
-  return restaurants.filter((restaurant) =>
-    restaurant?.data?.data?.name
-      ?.toLowerCase()
-      .includes(searchText.toLowerCase())
-  );
-};
+import { ALL_RESTAURANTS_API } from "../constants";
+import filterData from "../utils.js/filterData";
+import getOnlyRestaurants from "../utils.js/getOnlyRestaurants";
+import useAllRestaurants from "../hooks/useAllRestaurants";
 
 const Body = () => {
   const [searchText, setsearchText] = useState("");
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [allRestaurants, setAllRestaurants] = useState([]);
 
-  useEffect(() => {
-    getRestaurants();
-  }, []);
-
-  async function getRestaurants() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.927043825471223&lng=77.62274231761694&offset=15"
-    );
-    const json = await data.json();
-    setAllRestaurants(json?.data?.cards);
-    setFilteredRestaurants(json?.data?.cards);
-    console.log(json?.data?.cards);
-  }
-
-  // if (!allRestaurants) return null;
+  const { allRestaurants, filteredRestaurants } = useAllRestaurants();
 
   return allRestaurants?.length === 0 ? (
     <>
@@ -46,7 +26,6 @@ const Body = () => {
           value={searchText}
           onChange={(e) => {
             setsearchText(e.target.value);
-            // setAllRestaurants(restaurantList);
           }}
         />
         <button
