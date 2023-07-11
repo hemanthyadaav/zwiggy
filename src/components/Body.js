@@ -3,15 +3,20 @@ import Card from "./Card";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { ALL_RESTAURANTS_API } from "../constants";
-import filterData from "../utils.js/filterData";
-import getOnlyRestaurants from "../utils.js/getOnlyRestaurants";
+import filterData from "../utils/filterData";
+import getOnlyRestaurants from "../utils/getOnlyRestaurants";
 import useAllRestaurants from "../hooks/useAllRestaurants";
 import useOnline from "../hooks/useOnline";
 
 const Body = () => {
   const [searchText, setsearchText] = useState("");
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
-  const { allRestaurants, filteredRestaurants } = useAllRestaurants();
+  const allRestaurants = useAllRestaurants();
+
+  useEffect(() => {
+    setFilteredRestaurants(allRestaurants);
+  }, [allRestaurants]);
 
   const isOnline = useOnline();
 
