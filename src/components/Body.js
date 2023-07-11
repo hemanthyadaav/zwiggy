@@ -6,11 +6,18 @@ import { ALL_RESTAURANTS_API } from "../constants";
 import filterData from "../utils.js/filterData";
 import getOnlyRestaurants from "../utils.js/getOnlyRestaurants";
 import useAllRestaurants from "../hooks/useAllRestaurants";
+import useOnline from "../hooks/useOnline";
 
 const Body = () => {
   const [searchText, setsearchText] = useState("");
 
   const { allRestaurants, filteredRestaurants } = useAllRestaurants();
+
+  const isOnline = useOnline();
+
+  if (!isOnline) {
+    return <h1> 🔴 Offline! Please check your internet connection...!</h1>;
+  }
 
   return allRestaurants?.length === 0 ? (
     <>
