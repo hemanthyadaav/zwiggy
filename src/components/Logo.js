@@ -1,9 +1,9 @@
 const Logo = () => (
   <a href="/">
     <img
-      className="logo"
+      className="h-16"
       alt="logo"
-      src="https://www.91-cdn.com/pricebaba-blogimages/wp-content/uploads/2023/03/Zwigato.jpg"
+      src="https://img.freepik.com/free-vector/food-shopping-logo-template-design_460848-10299.jpg"
     ></img>
   </a>
 );
